@@ -19,7 +19,8 @@ class Fishing extends FMModel
         '釣りタイプ' => 'fishing_type',
         'フィールド' => 'field',
         '場所'  => 'place',
-        'コメント' => 'comment'
+        'コメント' => 'comment',
+        'fishings|PICTURES::写真' => 'picture',
     ];
 
     protected function casts(): array
