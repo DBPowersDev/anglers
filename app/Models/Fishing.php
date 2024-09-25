@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use GearboxSolutions\EloquentFileMaker\Database\Eloquent\FMModel;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Carbon\Carbon;
 
 class Fishing extends FMModel
 {
@@ -37,5 +38,20 @@ class Fishing extends FMModel
             'place' => 'string',
             'comment' => 'string'
         ];
+    }
+
+    protected function picture(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string|null $value) => \MyUtil::getContainerUrl($value),
+            set: fn(mixed $value) => $value
+        );
+    }
+
+    protected function fishingDate(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string|null $value) => $value ? Carbon::parse($value)->format('Y-m-d') : null,
+        );
     }
 }

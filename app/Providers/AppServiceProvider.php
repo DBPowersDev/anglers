@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Http;
+use App\Mylib\MyUtil;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -12,7 +13,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // 自作関数を登録
+        $this->app->bind('MyUtil', MyUtil::class);
     }
 
     /**
