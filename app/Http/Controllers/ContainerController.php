@@ -35,6 +35,7 @@ class ContainerController extends Controller
 
             $img = file_get_contents($path, false, stream_context_create($options));
         } else {
+
             $img = file_get_contents($path, false);
         }
 
