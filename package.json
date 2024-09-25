@@ -19,6 +19,8 @@
         "vite": "^5.0"
     },
     "dependencies": {
+        "@headlessui/vue": "^1.7.23",
+        "@heroicons/vue": "^2.1.5",
         "@inertiajs/vue3": "^1.2.0"
     }
 }
