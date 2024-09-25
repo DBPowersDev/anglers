@@ -24,7 +24,7 @@ class FishingController extends Controller
      */
     public function create()
     {
-        //
+        return inertia('Fishing/Create');
     }
 
     /**

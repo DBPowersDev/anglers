@@ -148,11 +148,11 @@
       </DisclosurePanel>
     </Disclosure>
 
-    <header class="bg-white shadow-sm">
+    <!-- <header class="bg-white shadow-sm">
       <div class="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <h1 class="text-lg font-semibold leading-6 text-gray-900">Dashboard</h1>
       </div>
-    </header>
+    </header> -->
     <main>
       <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
         <!-- Your content -->
@@ -181,8 +181,8 @@ const user = {
     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
 }
 const navigation = [
-  { name: 'Dashboard', href: route('fishing.index'), current: true },
-  { name: 'Team', href: '#', current: false },
+  { name: 'List', href: route('fishing.index'), current: true },
+  { name: 'Registration', href: route('fishing.create'), current: false },
   { name: 'Projects', href: '#', current: false },
   { name: 'Calendar', href: '#', current: false },
   { name: 'Reports', href: '#', current: false }
