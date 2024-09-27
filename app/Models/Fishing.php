@@ -18,7 +18,6 @@ class Fishing extends FMModel
         '修正者' => 'updated_by',
         '釣行日' => 'fishing_date',
         '釣りタイプ' => 'fishing_type',
-        'フィールド' => 'field',
         '場所'  => 'place',
         'コメント' => 'comment',
         'fishings|PICTURES::写真' => 'picture',
