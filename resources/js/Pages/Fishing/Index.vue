@@ -12,7 +12,11 @@
           alt=""
           class="pointer-events-none object-cover group-hover:opacity-75"
         />
-        <button type="button" class="absolute inset-0 focus:outline-none">
+        <button
+          @click="openEditModal(fishing.id)"
+          type="button"
+          class="absolute inset-0 focus:outline-none"
+        >
           <span class="sr-only">View details for {{ fishing.place }}</span>
         </button>
       </div>
@@ -24,14 +28,42 @@
       </p>
     </li>
   </ul>
+  <EditModal
+    :open="isEditModalOpen"
+    :fishing="page.props.flash.one_data"
+    @close="isEditModalOpen = false"
+  />
 </template>
 
 <script setup>
 // import Pagination from '@/Components/UI/Pagination.vue'
-import { Link } from '@inertiajs/vue3'
+import EditModal from '@/Pages/Fishing/Index/Components/Edit.vue'
+import { ref, computed, onMounted } from 'vue'
+import { router, usePage } from '@inertiajs/vue3'
 defineProps({
   fishings: Object
 })
+
+const isEditModalOpen = ref(false)
+const selectedFishing = ref(null)
+
+const page = usePage()
+const flashOnefish = computed(() => {
+  if (page.props.flash.one_data) {
+    return true
+  } else {
+    return false
+  }
+})
+
+const openEditModal = (id) => {
+  console.log(id)
+  router.visit(route('fishing.edit', { fishing: id }), {
+    except: ['fishings'],
+    preserveScroll: true
+  })
+}
+
 const files = [
   {
     title: 'IMG_4985.HEIC',
@@ -41,4 +73,8 @@ const files = [
   }
   // More files...
 ]
+
+onMounted(() => {
+  isEditModalOpen.value = flashOnefish.value
+})
 </script>

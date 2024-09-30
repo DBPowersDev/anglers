@@ -16,11 +16,17 @@ class FishingController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $fishings = Fishing::all();
+        // $fishings = Fishing::all();
+
+        $fishings = function () use ($request) {
+            $a = $request;
+            return Fishing::all();
+        };
+
         return inertia('Fishing/Index', [
-            'fishings' => $fishings
+            'fishings' => fn() => $fishings()
         ]);
     }
 
@@ -72,9 +78,15 @@ class FishingController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Fishing $fishing)
     {
-        //
+        // $fishing = Fishing::find($id);
+        $modId = $fishing->getModId();
+        return redirect()->back()
+            ->with([
+                'one_data' => $fishing,
+                'mod_id' => $modId
+            ]);
     }
 
     /**
