@@ -1,17 +1,3 @@
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
--->
 <template>
   <TransitionRoot as="template" :show="open">
     <Dialog class="relative z-10" @close="$emit('close')">
@@ -61,128 +47,146 @@
                   <div class="sm:col-span-4 lg:col-span-5">
                     <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100">
                       <img
-                        :src="product.imageSrc"
+                        :src="fishing.picture"
                         :alt="product.imageAlt"
                         class="object-cover object-center"
                       />
                     </div>
-                    <p class="absolute left-4 top-4 text-center sm:static sm:mt-6">
-                      <a
-                        :href="product.href"
-                        class="font-medium text-indigo-600 hover:text-indigo-500"
-                        >View full details</a
-                      >
-                    </p>
                   </div>
                   <div class="sm:col-span-8 lg:col-span-7">
-                    <h2 class="text-2xl font-bold text-gray-900 sm:pr-12">
-                      {{ props.fishing.place }}
-                    </h2>
-
-                    <section aria-labelledby="information-heading" class="mt-4">
-                      <h3 id="information-heading" class="sr-only">Product information</h3>
-
-                      <div class="flex items-center">
-                        <p class="text-lg text-gray-900 sm:text-xl">{{ product.price }}</p>
-
-                        <div class="ml-4 border-l border-gray-300 pl-4">
-                          <h4 class="sr-only">Reviews</h4>
-                          <div class="flex items-center">
-                            <div class="flex items-center">
-                              <StarIcon
-                                v-for="rating in [0, 1, 2, 3, 4]"
-                                :key="rating"
-                                :class="[
-                                  product.rating > rating ? 'text-yellow-400' : 'text-gray-300',
-                                  'h-5 w-5 flex-shrink-0'
-                                ]"
-                                aria-hidden="true"
-                              />
-                            </div>
-                            <p class="sr-only">{{ product.rating }} out of 5 stars</p>
-                          </div>
-                        </div>
-                      </div>
-
-                      <div class="mt-6 flex items-center">
-                        <CheckIcon
-                          class="h-5 w-5 flex-shrink-0 text-green-500"
-                          aria-hidden="true"
-                        />
-                        <p class="ml-2 font-medium text-gray-500">In stock and ready to ship</p>
-                      </div>
-                    </section>
-
                     <section aria-labelledby="options-heading" class="mt-6">
                       <h3 id="options-heading" class="sr-only">Product options</h3>
 
                       <form>
-                        <div class="sm:flex sm:justify-between">
-                          <!-- Size selector -->
-                          <fieldset>
-                            <legend class="block text-sm font-medium text-gray-700">Size</legend>
-                            <RadioGroup v-model="selectedSize">
-                              <div class="mt-1 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                <RadioGroupOption
-                                  as="template"
-                                  v-for="size in product.sizes"
-                                  :key="size.name"
-                                  :value="size"
-                                  :aria-label="size.name"
-                                  :aria-description="size.description"
-                                  v-slot="{ active, checked }"
-                                >
-                                  <div
-                                    :class="[
-                                      active ? 'ring-2 ring-indigo-500' : '',
-                                      'relative block cursor-pointer rounded-lg border border-gray-300 p-4 focus:outline-none'
-                                    ]"
-                                  >
-                                    <p class="text-base font-medium text-gray-900">
-                                      {{ size.name }}
-                                    </p>
-                                    <p class="mt-1 text-sm text-gray-500">{{ size.description }}</p>
-                                    <div
-                                      :class="[
-                                        active ? 'border' : 'border-2',
-                                        checked ? 'border-indigo-500' : 'border-transparent',
-                                        'pointer-events-none absolute -inset-px rounded-lg'
-                                      ]"
-                                      aria-hidden="true"
-                                    />
-                                  </div>
-                                </RadioGroupOption>
-                              </div>
-                            </RadioGroup>
-                          </fieldset>
-                        </div>
-                        <div class="mt-4 flex">
-                          <a href="#" class="group flex text-sm text-gray-500 hover:text-gray-700">
-                            <span>What size should I buy?</span>
-                            <QuestionMarkCircleIcon
-                              class="ml-2 h-5 w-5 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                              aria-hidden="true"
-                            />
-                          </a>
-                        </div>
-                        <div class="mt-6">
-                          <button
-                            type="submit"
-                            class="flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50"
-                          >
-                            Add to bag
-                          </button>
-                        </div>
-                        <div class="mt-6 text-center">
-                          <a href="#" class="group inline-flex text-base font-medium">
-                            <ShieldCheckIcon
-                              class="mr-2 h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
-                              aria-hidden="true"
-                            />
-                            <span class="text-gray-500 group-hover:text-gray-700"
-                              >Lifetime Guarantee</span
+                        <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+                          <div class="sm:col-span-2 sm:col-start-1">
+                            <label
+                              for="fishing_date"
+                              class="block text-sm font-medium leading-6 text-gray-900"
+                              >Date</label
                             >
-                          </a>
+                            <div class="mt-2">
+                              <input
+                                type="date"
+                                v-model="form.fishing_date"
+                                id="fishing_date"
+                                autocomplete="off"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              />
+                            </div>
+                          </div>
+
+                          <div class="col-span-full">
+                            <label
+                              for="comment"
+                              class="block text-sm font-medium leading-6 text-gray-900"
+                              >Comment</label
+                            >
+                            <div class="mt-2">
+                              <textarea
+                                id="comment"
+                                v-model="form.comment"
+                                rows="3"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              />
+                            </div>
+                          </div>
+
+                          <div class="sm:col-span-3">
+                            <label
+                              for="place"
+                              class="block text-sm font-medium leading-6 text-gray-900"
+                              >Place</label
+                            >
+                            <div class="mt-2">
+                              <input
+                                type="text"
+                                v-model="form.place"
+                                id="place"
+                                autocomplete="off"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                              />
+                            </div>
+                          </div>
+
+                          <div class="sm:col-span-3">
+                            <fieldset>
+                              <legend class="text-sm font-semibold leading-6 text-gray-900">
+                                Fishing type
+                              </legend>
+
+                              <div class="mt-6 space-y-6">
+                                <div class="flex items-center gap-x-3">
+                                  <input
+                                    id="fly-fishing"
+                                    v-model="form.fishing_type"
+                                    type="radio"
+                                    class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                    value="fly"
+                                  />
+                                  <label
+                                    for="fly-fishing"
+                                    class="block text-sm font-medium leading-6 text-gray-900"
+                                    >fly fishing</label
+                                  >
+                                </div>
+                                <div class="flex items-center gap-x-3">
+                                  <input
+                                    id="lure-fishing"
+                                    v-model="form.fishing_type"
+                                    type="radio"
+                                    class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                    value="lure"
+                                  />
+                                  <label
+                                    for="lure-fishing"
+                                    class="block text-sm font-medium leading-6 text-gray-900"
+                                    >lure fishing</label
+                                  >
+                                </div>
+                                <div class="flex items-center gap-x-3">
+                                  <input
+                                    id="bait-fishing"
+                                    v-model="form.fishing_type"
+                                    type="radio"
+                                    class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                    value="bait"
+                                  />
+                                  <label
+                                    for="bait-fishing"
+                                    class="block text-sm font-medium leading-6 text-gray-900"
+                                    >bait fishing</label
+                                  >
+                                </div>
+                              </div>
+                            </fieldset>
+                          </div>
+                        </div>
+
+                        <div class="mt-6 flex items-center gap-x-6">
+                          <button
+                            type="button"
+                            class="text-sm font-semibold leading-6 text-red-600"
+                            @click="delete"
+                          >
+                            Delete
+                          </button>
+                          <div class="flex items-center gap-x-6 ml-auto">
+                            <button
+                              type="button"
+                              class="text-sm font-semibold leading-6 text-gray-900"
+                              @click="reset"
+                            >
+                              Cancel
+                            </button>
+                            <button
+                              @click="update"
+                              type="submit"
+                              class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                            >
+                              Save
+                            </button>
+                          </div>
                         </div>
                       </form>
                     </section>
@@ -209,11 +213,19 @@ import {
 } from '@headlessui/vue'
 import { ShieldCheckIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { CheckIcon, QuestionMarkCircleIcon, StarIcon } from '@heroicons/vue/20/solid'
+import { useForm } from '@inertiajs/vue3'
 
 const props = defineProps({
   open: Boolean,
   selectedSize: Object,
   fishing: Object
+})
+
+const form = useForm({
+  fishing_date: props.fishing ? props.fishing.fishing_date : null,
+  comment: props.fishing ? props.fishing.comment : null,
+  place: props.fishing ? props.fishing.place : null,
+  fishing_type: props.fishing ? props.fishing.fishing_type : null
 })
 
 const emit = defineEmits(['close'])
