@@ -47,17 +47,18 @@
                   <div class="sm:col-span-4 lg:col-span-5">
                     <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100">
                       <img
+                        v-if="fishing && fishing.picture"
                         :src="fishing.picture"
-                        :alt="product.imageAlt"
+                        :alt="fishing.place"
                         class="object-cover object-center"
                       />
                     </div>
                   </div>
                   <div class="sm:col-span-8 lg:col-span-7">
                     <section aria-labelledby="options-heading" class="mt-6">
-                      <h3 id="options-heading" class="sr-only">Product options</h3>
+                      <h3 id="options-heading" class="sr-only">Fishing data</h3>
 
-                      <form>
+                      <form @submit.prevent="submit">
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                           <div class="sm:col-span-2 sm:col-start-1">
                             <label
@@ -167,7 +168,7 @@
                           <button
                             type="button"
                             class="text-sm font-semibold leading-6 text-red-600"
-                            @click="delete"
+                            @click="deleteFishing"
                           >
                             Delete
                           </button>
@@ -180,8 +181,8 @@
                               Cancel
                             </button>
                             <button
-                              @click="update"
-                              type="submit"
+                              @click="updateFishing"
+                              type="button"
                               class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                             >
                               Save
@@ -213,37 +214,67 @@ import {
 } from '@headlessui/vue'
 import { ShieldCheckIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { CheckIcon, QuestionMarkCircleIcon, StarIcon } from '@heroicons/vue/20/solid'
-import { useForm } from '@inertiajs/vue3'
+import { useForm, usePage } from '@inertiajs/vue3'
 
 const props = defineProps({
   open: Boolean,
-  selectedSize: Object,
-  fishing: Object
+  fishing: {
+    type: Object,
+    default: () => ({ picture: '', place: '' }) // デフォルト値を設定
+  },
+  mod_id: String
 })
+
+const emit = defineEmits(['close'])
+
+const page = usePage()
 
 const form = useForm({
   fishing_date: props.fishing ? props.fishing.fishing_date : null,
   comment: props.fishing ? props.fishing.comment : null,
   place: props.fishing ? props.fishing.place : null,
-  fishing_type: props.fishing ? props.fishing.fishing_type : null
+  fishing_type: props.fishing ? props.fishing.fishing_type : null,
+  mod_id: props.mod_id ? props.mod_id : null
 })
 
-const emit = defineEmits(['close'])
-
-const product = {
-  name: 'Everyday Ruck Snack',
-  price: '$220',
-  rating: 3.9,
-  href: '#',
-  imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-quick-preview-03-detail.jpg',
-  imageAlt:
-    'Interior of light green canvas bag with padded laptop sleeve and internal organization pouch.',
-  sizes: [
-    { name: '18L', description: 'Perfect for a reasonable amount of snacks.' },
-    { name: '20L', description: 'Enough room for a serious amount of snacks.' }
-  ]
+const updateFishing = () => {
+  form.put(route('fishing.update', { fishing: props.fishing.id }), {
+    preserveScroll: true,
+    onSuccess: () => {
+      emit('close')
+    },
+    onError: (errors) => {
+      console.error(errors)
+      if (page.props.errors) {
+        alert(page.props.errors.error) // エラーメッセージを表示
+      }
+    },
+    onFinish: () => {
+      //
+    }
+  })
 }
 
-// const open = ref(false)
-const selectedSize = ref(product.sizes[0])
+const deleteFishing = () => {
+  form.delete(route('fishing.destroy', { fishing: props.fishing.id }), {
+    preserveScroll: true,
+    onSuccess: () => {
+      emit('close')
+    },
+    onError: (errors) => {
+      console.error(errors)
+      if (page.props.errors) {
+        alert(page.props.errors.error) // エラーメッセージを表示
+      }
+    },
+    onFinish: () => {
+      //
+    }
+  })
+}
+
+const reset = () => {
+  form.reset()
+  emit('close')
+}
 </script>

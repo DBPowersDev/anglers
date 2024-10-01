@@ -12,26 +12,43 @@
           alt=""
           class="pointer-events-none object-cover group-hover:opacity-75"
         />
-        <button
-          @click="openEditModal(fishing.id)"
-          type="button"
+        <Link
+          :href="route('fishing.show', { fishing: fishing.id })"
+          as="button"
           class="absolute inset-0 focus:outline-none"
         >
           <span class="sr-only">View details for {{ fishing.place }}</span>
-        </button>
+        </Link>
       </div>
-      <p class="pointer-events-none mt-2 block truncate text-sm font-medium text-gray-900">
-        {{ fishing.place }}
-      </p>
-      <p class="pointer-events-none block text-sm font-medium text-gray-500">
-        {{ fishing.fishing_date }}
-      </p>
+      <div class="flex justify-between mt-2">
+        <!-- 左寄せと右寄せを分ける -->
+        <div class="flex-1">
+          <!-- コンテンツを左寄せ -->
+          <p class="pointer-events-none block truncate text-sm font-medium text-gray-900">
+            {{ fishing.place }}
+          </p>
+          <p class="pointer-events-none block text-sm font-medium text-gray-500">
+            {{ fishing.fishing_date }}
+          </p>
+        </div>
+        <div class="flex justify-end">
+          <!-- ボタンを右寄せ -->
+          <button
+            @click="openEditModal(fishing.id)"
+            type="button"
+            class="rounded-md bg-indigo-600 px-3 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+          >
+            Edit
+          </button>
+        </div>
+      </div>
     </li>
   </ul>
   <EditModal
     :open="isEditModalOpen"
     :fishing="page.props.flash.one_data"
-    @close="isEditModalOpen = false"
+    :mod_id="page.props.flash.mod_id"
+    @close="closeEditModal"
   />
 </template>
 
@@ -39,13 +56,12 @@
 // import Pagination from '@/Components/UI/Pagination.vue'
 import EditModal from '@/Pages/Fishing/Index/Components/Edit.vue'
 import { ref, computed, onMounted } from 'vue'
-import { router, usePage } from '@inertiajs/vue3'
+import { router, usePage, Link } from '@inertiajs/vue3'
 defineProps({
   fishings: Object
 })
 
 const isEditModalOpen = ref(false)
-const selectedFishing = ref(null)
 
 const page = usePage()
 const flashOnefish = computed(() => {
@@ -57,22 +73,17 @@ const flashOnefish = computed(() => {
 })
 
 const openEditModal = (id) => {
-  console.log(id)
   router.visit(route('fishing.edit', { fishing: id }), {
     except: ['fishings'],
     preserveScroll: true
   })
 }
 
-const files = [
-  {
-    title: 'IMG_4985.HEIC',
-    size: '3.9 MB',
-    source:
-      'https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80'
-  }
-  // More files...
-]
+// const show = (id) => router.visit(route('fishing.show', { fishing: id }))
+
+const closeEditModal = () => {
+  isEditModalOpen.value = false
+}
 
 onMounted(() => {
   isEditModalOpen.value = flashOnefish.value

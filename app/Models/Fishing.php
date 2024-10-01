@@ -7,9 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 use GearboxSolutions\EloquentFileMaker\Database\Eloquent\FMModel;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Fishing extends FMModel
 {
+    use SoftDeletes;
+
     protected $fieldMapping = [
         '主キー' => 'id',
         '作成情報タイムスタンプ' => 'created_at',
@@ -21,6 +24,7 @@ class Fishing extends FMModel
         '場所'  => 'place',
         'コメント' => 'comment',
         'fishings|PICTURES::写真' => 'picture',
+        '削除日時' => 'deleted_at',
     ];
 
     protected function casts(): array
@@ -30,6 +34,7 @@ class Fishing extends FMModel
             'created_at' => 'datetime',
             'created_by' => 'string',
             'updated_at' => 'datetime',
+            'deleted_at' => 'datetime',
             'updated_by' => 'string',
             'fishing_date' => 'date',
             'fishing_type' => 'string',

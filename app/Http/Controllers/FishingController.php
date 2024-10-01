@@ -64,15 +64,19 @@ class FishingController extends Controller
 
         return redirect()
             ->route('fishing.index')
-            ->with('success', __('Added fishing data.'));
+            ->with('success', __('Fishing created successfully.'));
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    // public function show(string $id)
+    public function show(Fishing $fishing)
     {
-        //
+        // $fishing = Fishing::find($id);
+        return inertia('Fishing/Show', [
+            'fishing' => $fishing
+        ]);
     }
 
     /**
@@ -81,6 +85,7 @@ class FishingController extends Controller
     public function edit(Fishing $fishing)
     {
         // $fishing = Fishing::find($id);
+        // $modId = (int) $fishing->getModId();
         $modId = $fishing->getModId();
         return redirect()->back()
             ->with([
@@ -92,16 +97,29 @@ class FishingController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Fishing $fishing)
     {
-        //
+        $fishing->fishing_date = $request->fishing_date;
+        $fishing->fishing_type = $request->fishing_type;
+        $fishing->place = $request->place;
+        $fishing->comment = $request->comment;
+
+        $fishing->setModId($request->mod_id);
+        $fishing->save();
+        // $fishing->update();
+
+        return redirect()->route('fishing.index')
+            ->with('success', __('Fishing changed successfully.'));
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Fishing $fishing)
     {
-        //
+        $fishing->delete();
+
+        return redirect()->route('fishing.index')
+            ->with('success', __('Fishing deleted successfully.'));
     }
 }
