@@ -6,8 +6,8 @@
           <div class="flex items-center">
             <div class="flex-shrink-0">
               <img
-                class="h-8 w-8"
-                src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                class="h-10 w-auto"
+                :src="'/storage/images/linkedin_banner_image_1_whiteout.png'"
                 alt="Your Company"
               />
             </div>
@@ -48,7 +48,7 @@
                   >
                     <span class="absolute -inset-1.5" />
                     <span class="sr-only">Open user menu</span>
-                    <img class="h-8 w-8 rounded-full" :src="user.imageUrl" alt="" />
+                    <img class="h-8 w-8 rounded-full" :src="user.photo" alt="" />
                   </MenuButton>
                 </div>
                 <transition
@@ -63,13 +63,15 @@
                     class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                   >
                     <MenuItem v-for="item in userNavigation" :key="item.name" v-slot="{ active }">
-                      <a
+                      <Link
                         :href="item.href"
+                        :method="item.method"
+                        as="button"
                         :class="[
                           active ? 'bg-gray-100' : '',
-                          'block px-4 py-2 text-sm text-gray-700'
+                          'w-full block px-4 py-2 text-sm text-gray-700 text-start'
                         ]"
-                        >{{ item.name }}</a
+                        >{{ item.name }}</Link
                       >
                     </MenuItem>
                   </MenuItems>
@@ -111,7 +113,7 @@
         <div class="border-t border-gray-700 pb-3 pt-4">
           <div class="flex items-center px-5">
             <div class="flex-shrink-0">
-              <img class="h-10 w-10 rounded-full" :src="user.imageUrl" alt="" />
+              <img class="h-10 w-10 rounded-full" :src="user.photo" alt="" />
             </div>
             <div class="ml-3">
               <div class="text-base font-medium text-white">{{ user.name }}</div>
@@ -127,13 +129,14 @@
             </button>
           </div>
           <div class="mt-3 space-y-1 px-2">
-            <DisclosureButton
+            <Link
               v-for="item in userNavigation"
               :key="item.name"
-              as="a"
+              as="button"
               :href="item.href"
-              class="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-              >{{ item.name }}</DisclosureButton
+              :method="item.method"
+              class="w-full block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white text-start"
+              >{{ item.name }}</Link
             >
           </div>
         </div>
@@ -172,17 +175,18 @@ import {
 } from '@headlessui/vue'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
 import { computed, ref } from 'vue'
-import { usePage } from '@inertiajs/vue3'
+import { usePage, Link } from '@inertiajs/vue3'
 
 const page = usePage()
 const flashSuccess = computed(() => page.props.flash.success)
 
-const user = {
-  name: 'Tom Cook',
-  email: 'tom@example.com',
-  imageUrl:
-    'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-}
+const user = computed(() => page.props.user)
+// const user = {
+//   name: 'Tom Cook',
+//   email: 'tom@example.com',
+//   imageUrl:
+//     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
+// }
 const navigation = [
   { name: 'List', href: route('fishing.index'), current: true },
   { name: 'Registration', href: route('fishing.create'), current: false },
@@ -193,6 +197,6 @@ const navigation = [
 const userNavigation = [
   { name: 'Your Profile', href: '#' },
   { name: 'Settings', href: '#' },
-  { name: 'Sign out', href: '#' }
+  { name: 'Sign out', href: route('logout'), method: 'DELETE' }
 ]
 </script>

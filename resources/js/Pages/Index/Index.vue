@@ -1,51 +1,46 @@
-<!--
-  This example requires some changes to your config:
-  
-  ```
-  // tailwind.config.js
-  module.exports = {
-    // ...
-    plugins: [
-      // ...
-      require('@tailwindcss/aspect-ratio'),
-    ],
-  }
-  ```
--->
 <template>
-  <ul
-    role="list"
-    class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
-  >
-    <li v-for="file in files" :key="file.source" class="relative">
-      <div
-        class="group aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100"
-      >
-        <img
-          :src="file.source"
-          alt=""
-          class="pointer-events-none object-cover group-hover:opacity-75"
-        />
-        <button type="button" class="absolute inset-0 focus:outline-none">
-          <span class="sr-only">View details for {{ file.title }}</span>
-        </button>
+  <div class="flex absolute inset-0 w-full flex-1">
+    <div class="mx-auto max-w-7xl lg:grid lg:grid-cols-12 lg:gap-x-8 lg:px-8">
+      <div class="px-6 pb-24 pt-10 sm:pb-32 lg:col-span-7 lg:px-0 lg:pb-56 lg:pt-48 xl:col-span-6">
+        <div class="mx-auto max-w-2xl lg:mx-0">
+          <img
+            class="h-36 w-auto"
+            :src="'/storage/images/facebook_profile_image_whiteout.png'"
+            alt="Your Company"
+          />
+          <h1 class="mt-24 text-4xl font-bold tracking-tight text-gray-900 sm:mt-10 sm:text-6xl">
+            Angler's
+          </h1>
+          <p class="mt-6 text-lg leading-8 text-gray-600">
+            This Angler's Site is a platform where you can upload photos of the trout you catch and
+            show them off! Share your fishing achievements with fellow enthusiasts, celebrate your
+            catches, and connect with a community that appreciates the art of fishing. Join us to
+            showcase your best moments on the water and inspire others with your fishing adventures!
+          </p>
+          <div class="mt-10 flex items-center gap-x-6">
+            <Link
+              :href="route('login')"
+              class="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              >Sign in</Link
+            >
+            <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
+              >Learn more <span aria-hidden="true">→</span></a
+            >
+          </div>
+        </div>
       </div>
-      <p class="pointer-events-none mt-2 block truncate text-sm font-medium text-gray-900">
-        {{ file.title }}
-      </p>
-      <p class="pointer-events-none block text-sm font-medium text-gray-500">{{ file.size }}</p>
-    </li>
-  </ul>
+      <div class="relative lg:col-span-5 lg:-mr-8 xl:absolute xl:inset-0 xl:left-1/2 xl:mr-0">
+        <img
+          class="aspect-[3/2] w-full bg-gray-50 object-cover lg:absolute lg:inset-0 lg:aspect-auto lg:h-full"
+          :src="'/storage/images/IMG_1812.JPG'"
+          alt=""
+        />
+      </div>
+    </div>
+  </div>
 </template>
-
 <script setup>
-const files = [
-  {
-    title: 'IMG_4985.HEIC',
-    size: '3.9 MB',
-    source:
-      'https://images.unsplash.com/photo-1582053433976-25c00369fc93?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=512&q=80'
-  }
-  // More files...
-]
+import { Link } from '@inertiajs/vue3'
+import SingleLayout from '/resources/js/Layouts/SingleLayout.vue'
+defineOptions({ layout: SingleLayout }) // ここでレイアウトファイルを指定する
 </script>

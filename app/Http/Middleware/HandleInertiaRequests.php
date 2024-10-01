@@ -43,11 +43,10 @@ class HandleInertiaRequests extends Middleware
                 'mod_id' => fn() => $request->session()->get('mod_id'),
             ],
             'user' => $request->user() ? [
-                // 'id' => $request->user()->id,
-                // 'name' => $request->user()->name,
-                // 'email' => $request->user()->email,
-                // 'notificationCount' => $request->user()->unreadNotifications()->count()
-                // 'notificationCount' => \DB::table('notifications')->whereNull('read_at')->where('notifiable_id', $request->user()->id)->get()->count()
+                'id' => fn() => $request->user()->id,
+                'name' => fn() => $request->user()->name,
+                'email' => fn() => $request->user()->email,
+                'photo' => fn() => $request->user()->photo,
             ] : null
 
         ]);
