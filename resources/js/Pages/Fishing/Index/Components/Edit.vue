@@ -72,7 +72,7 @@
                                 v-model="form.fishing_date"
                                 id="fishing_date"
                                 autocomplete="off"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
                               />
                             </div>
                           </div>
@@ -88,7 +88,7 @@
                                 id="comment"
                                 v-model="form.comment"
                                 rows="3"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
                               />
                             </div>
                           </div>
@@ -105,7 +105,7 @@
                                 v-model="form.place"
                                 id="place"
                                 autocomplete="off"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
                               />
                             </div>
                           </div>
@@ -122,7 +122,7 @@
                                     id="fly-fishing"
                                     v-model="form.fishing_type"
                                     type="radio"
-                                    class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                    class="h-4 w-4 border-gray-300 text-orange-600 focus:ring-orange-600"
                                     value="fly"
                                   />
                                   <label
@@ -136,7 +136,7 @@
                                     id="lure-fishing"
                                     v-model="form.fishing_type"
                                     type="radio"
-                                    class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                    class="h-4 w-4 border-gray-300 text-orange-600 focus:ring-orange-600"
                                     value="lure"
                                   />
                                   <label
@@ -150,7 +150,7 @@
                                     id="bait-fishing"
                                     v-model="form.fishing_type"
                                     type="radio"
-                                    class="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                                    class="h-4 w-4 border-gray-300 text-orange-600 focus:ring-orange-600"
                                     value="bait"
                                   />
                                   <label
@@ -183,7 +183,7 @@
                             <button
                               @click="updateFishing"
                               type="button"
-                              class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                              class="rounded-md bg-orange-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
                             >
                               Save
                             </button>

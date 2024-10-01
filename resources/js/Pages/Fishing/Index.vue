@@ -5,7 +5,7 @@
   >
     <li v-for="fishing in fishings" :key="fishing.id" class="relative">
       <div
-        class="group aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100"
+        class="group aspect-h-7 aspect-w-10 block w-full overflow-hidden rounded-lg bg-gray-100 focus-within:ring-2 focus-within:ring-orange-500 focus-within:ring-offset-2 focus-within:ring-offset-gray-100"
       >
         <img
           :src="fishing.picture"
@@ -36,7 +36,7 @@
           <button
             @click="openEditModal(fishing.id)"
             type="button"
-            class="rounded-md bg-indigo-600 px-3 py-1 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500"
+            class="rounded-md bg-orange-600 px-3 py-1 text-sm font-semibold text-white shadow-sm hover:bg-orange-500"
           >
             Edit
           </button>

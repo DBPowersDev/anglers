@@ -24,7 +24,7 @@
                 v-model="form.email"
                 type="email"
                 autocomplete="email"
-                class="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                class="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
                 placeholder="Email address"
               />
             </div>
@@ -35,7 +35,7 @@
                 v-model="form.password"
                 type="password"
                 autocomplete="current-password"
-                class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                class="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
                 placeholder="Password"
               />
             </div>
@@ -47,7 +47,7 @@
                 id="remember-me"
                 v-model="form.remember_me"
                 type="checkbox"
-                class="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+                class="h-4 w-4 rounded border-gray-300 text-orange-600 focus:ring-orange-600"
               />
               <label for="remember-me" class="ml-3 block text-sm leading-6 text-gray-900"
                 >Remember me</label
@@ -55,7 +55,7 @@
             </div>
 
             <div class="text-sm leading-6">
-              <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500"
+              <a href="#" class="font-semibold text-orange-600 hover:text-orange-500"
                 >Forgot password?</a
               >
             </div>
@@ -64,7 +64,7 @@
           <div>
             <button
               type="submit"
-              class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+              class="flex w-full justify-center rounded-md bg-orange-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
             >
               Sign in
             </button>
@@ -74,7 +74,7 @@
         <p class="text-center text-sm leading-6 text-gray-500">
           Not a member?
           {{ ' ' }}
-          <a href="#" class="font-semibold text-indigo-600 hover:text-indigo-500"
+          <a href="#" class="font-semibold text-orange-600 hover:text-orange-500"
             >Start a 14-day free trial</a
           >
         </p>
