@@ -22,7 +22,9 @@ class FishingController extends Controller
 
         $fishings = function () use ($request) {
             $a = $request;
-            return Fishing::all();
+            return Fishing::where('publish', '==1')
+                ->orderBy('fishing_date', 'desc')
+                ->get();
         };
 
         return inertia('Fishing/Index', [
@@ -48,6 +50,7 @@ class FishingController extends Controller
         $fishing->fishing_type = $request->fishing_type;
         $fishing->place = $request->place;
         $fishing->comment = $request->comment;
+        $fishing->user_id = auth()->user()->id;
         $fishing->save();
 
         // 画像を保存

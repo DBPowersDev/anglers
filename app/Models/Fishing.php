@@ -23,8 +23,11 @@ class Fishing extends FMModel
         '釣りタイプ' => 'fishing_type',
         '場所'  => 'place',
         'コメント' => 'comment',
-        'fishings|PICTURES::写真' => 'picture',
         '削除日時' => 'deleted_at',
+        '公開' => 'publish',
+        'fishings|PICTURES::写真' => 'picture',
+        'fishings|USERS::name' => 'user_name',
+        'fishings|USERS::photo' => 'user_photo',
     ];
 
     protected function casts(): array
@@ -40,15 +43,23 @@ class Fishing extends FMModel
             'fishing_type' => 'string',
             'field' => 'string',
             'place' => 'string',
-            'comment' => 'string'
+            'comment' => 'string',
+            'publish' => 'int',
+            'user_name' => 'string',
         ];
     }
 
     protected function picture(): Attribute
     {
         return Attribute::make(
-            get: fn(string|null $value) => \MyUtil::getContainerUrl($value),
-            set: fn(mixed $value) => $value
+            get: fn(string|null $value) => \MyUtil::getContainerUrl($value)
+        );
+    }
+
+    protected function userPhoto(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string|null $value) => \MyUtil::getContainerUrl($value)
         );
     }
 

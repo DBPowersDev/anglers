@@ -189,10 +189,10 @@ const user = computed(() => page.props.user)
 // }
 const navigation = [
   { name: 'List', href: route('fishing.index'), current: true },
-  { name: 'Registration', href: route('fishing.create'), current: false },
-  { name: 'Projects', href: '#', current: false },
-  { name: 'Calendar', href: '#', current: false },
-  { name: 'Reports', href: '#', current: false }
+  { name: 'Registration', href: route('fishing.create'), current: false }
+  // { name: 'Projects', href: '#', current: false },
+  // { name: 'Calendar', href: '#', current: false },
+  // { name: 'Reports', href: '#', current: false }
 ]
 const userNavigation = [
   { name: 'Your Profile', href: '#' },

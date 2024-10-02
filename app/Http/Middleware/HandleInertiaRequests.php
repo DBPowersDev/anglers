@@ -43,7 +43,7 @@ class HandleInertiaRequests extends Middleware
                 'mod_id' => fn() => $request->session()->get('mod_id'),
             ],
             'user' => $request->user() ? [
-                'id' => fn() => $request->user()->id,
+                'id' => fn() => (int) $request->user()->id,
                 'name' => fn() => $request->user()->name,
                 'email' => fn() => $request->user()->email,
                 'photo' => fn() => $request->user()->photo,

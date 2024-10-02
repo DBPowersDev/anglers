@@ -28,15 +28,17 @@
             {{ fishing.place }}
           </p>
           <p class="pointer-events-none block text-sm font-medium text-gray-500">
-            {{ fishing.fishing_date }}
+            {{ fishing.fishing_date }} by {{ fishing.user_name }}
           </p>
         </div>
         <div class="flex justify-end">
-          <!-- ボタンを右寄せ -->
+          <img :src="fishing.user_photo" alt="" class="h-8 w-8 rounded-full m-1" />
+        </div>
+        <div v-if="page.props.user.id === fishing.user_id" class="flex justify-end">
           <button
             @click="openEditModal(fishing.id)"
             type="button"
-            class="rounded-md bg-orange-600 px-3 py-1 text-sm font-semibold text-white shadow-sm hover:bg-orange-500"
+            class="rounded-md border border-orange-600 px-3 py-1 text-sm font-semibold text-orange-600 shadow-sm hover:bg-orange-600 hover:text-white"
           >
             Edit
           </button>

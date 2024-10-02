@@ -63,6 +63,11 @@
           <div class="mt-4 space-y-6">
             <p class="text-base text-gray-500">{{ fishing.comment }}</p>
           </div>
+
+          <div class="mt-6 flex items-center">
+            <CheckIcon class="h-5 w-5 flex-shrink-0 text-green-500" aria-hidden="true" />
+            <p class="ml-2 text-sm text-gray-500">{{ fishing.user_name }}</p>
+          </div>
         </section>
       </div>
 
