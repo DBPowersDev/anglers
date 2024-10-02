@@ -18,13 +18,12 @@ class FishingController extends Controller
      */
     public function index(Request $request)
     {
-        // $fishings = Fishing::all();
 
         $fishings = function () use ($request) {
-            $a = $request;
             return Fishing::where('publish', '==1')
                 ->orderBy('fishing_date', 'desc')
-                ->get();
+                ->paginate(9)
+                ->withQueryString();
         };
 
         return inertia('Fishing/Index', [
