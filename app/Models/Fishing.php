@@ -46,6 +46,7 @@ class Fishing extends FMModel
             'comment' => 'string',
             'publish' => 'int',
             'user_name' => 'string',
+            'user_id' => 'int',
         ];
     }
 
