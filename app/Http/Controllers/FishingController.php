@@ -64,6 +64,8 @@ class FishingController extends Controller
         $pitcure->picture = $fmFile;
         $pitcure->save();
 
+        $this->deleteUpFile($path);
+
         return redirect()
             ->route('fishing.index')
             ->with('success', __('Fishing created successfully.'));
@@ -122,5 +124,10 @@ class FishingController extends Controller
 
         return redirect()->route('fishing.index')
             ->with('success', __('Fishing deleted successfully.'));
+    }
+
+    protected function deleteUpFile($path)
+    {
+        Storage::delete($path);
     }
 }
