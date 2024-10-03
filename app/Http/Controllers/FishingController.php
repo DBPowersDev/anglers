@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Fishing;
 use App\Models\Picture;
+use Illuminate\Support\Facades\Gate;
+
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Validation\ValidatesRequests;
 
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
@@ -13,11 +17,20 @@ use Intervention\Image\ImageManager;
 
 class FishingController extends Controller
 {
+
+    // use AuthorizesRequests, ValidatesRequests;
+
+    // public function __construct()
+    // {
+    //     $this->authorizeResource(Fishing::class, 'fishing');
+    // }
+
     /**
      * Display a listing of the resource.
      */
-    public function index(Request $request)
+    public function index(Request $request, Fishing $fishing)
     {
+        Gate::authorize('viewAny', $fishing);
 
         $fishings = function () use ($request) {
             return Fishing::where('publish', '==1')
@@ -34,16 +47,19 @@ class FishingController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Fishing $fishing)
     {
+        Gate::authorize('create', $fishing);
         return inertia('Fishing/Create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ContainerRequest $request)
+    public function store(ContainerRequest $request, Fishing $fishing)
     {
+        Gate::authorize('create', $fishing);
+
         $fishing = new Fishing();
         $fishing->fishing_date = $request->fishing_date;
         $fishing->fishing_type = $request->fishing_type;
@@ -78,6 +94,7 @@ class FishingController extends Controller
     // public function show(string $id)
     public function show(Fishing $fishing)
     {
+        Gate::authorize('view', $fishing);
         // $fishing = Fishing::find($id);
         return inertia('Fishing/Show', [
             'fishing' => $fishing
@@ -89,6 +106,7 @@ class FishingController extends Controller
      */
     public function edit(Fishing $fishing)
     {
+        Gate::authorize('update', $fishing);
         // $modId = (int) $fishing->getModId();
         $modId = $fishing->getModId();
         return redirect()->back()
@@ -103,6 +121,8 @@ class FishingController extends Controller
      */
     public function update(Request $request, Fishing $fishing)
     {
+        Gate::authorize('update', $fishing);
+
         $fishing->fishing_date = $request->fishing_date;
         $fishing->fishing_type = $request->fishing_type;
         $fishing->place = $request->place;
@@ -121,6 +141,8 @@ class FishingController extends Controller
      */
     public function destroy(Fishing $fishing)
     {
+        Gate::authorize('delete', $fishing);
+
         $fishing->delete();
 
         return redirect()->route('fishing.index')
