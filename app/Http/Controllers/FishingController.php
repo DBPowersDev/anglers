@@ -86,7 +86,6 @@ class FishingController extends Controller
      */
     public function edit(Fishing $fishing)
     {
-        // $fishing = Fishing::find($id);
         // $modId = (int) $fishing->getModId();
         $modId = $fishing->getModId();
         return redirect()->back()
