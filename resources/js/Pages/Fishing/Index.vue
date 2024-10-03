@@ -5,7 +5,7 @@
     </div>
     <ul
       role="list"
-      class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8"
+      class="grid grid-cols-2 gap-x-4 gap-y-8 sm:grid-cols-3 sm:gap-x-6 lg:grid-cols-4 xl:gap-x-8 mb-10"
     >
       <li v-for="fishing in fishings.data" :key="fishing.id" class="relative">
         <div
@@ -42,7 +42,7 @@
             <button
               @click="openEditModal(fishing.id)"
               type="button"
-              class="rounded-md border border-orange-600 px-3 py-1 text-sm font-semibold text-orange-600 shadow-sm hover:bg-orange-600 hover:text-white"
+              class="h-8 mt-1 rounded-md border border-orange-600 px-3 py-1 text-sm font-semibold text-orange-600 shadow-sm hover:bg-orange-600 hover:text-white"
             >
               Edit
             </button>
