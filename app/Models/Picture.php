@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use GearboxSolutions\EloquentFileMaker\Database\Eloquent\FMModel;
-use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Picture extends FMModel
 {
