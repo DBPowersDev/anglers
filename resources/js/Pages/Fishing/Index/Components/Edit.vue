@@ -222,7 +222,7 @@ const props = defineProps({
     type: Object,
     default: () => ({ picture: '', place: '' }) // デフォルト値を設定
   },
-  mod_id: String
+  mod_id: Number
 })
 
 const emit = defineEmits(['close'])
@@ -244,7 +244,6 @@ const updateFishing = () => {
       emit('close')
     },
     onError: (errors) => {
-      console.error(errors)
       if (page.props.errors) {
         alert(page.props.errors.error) // エラーメッセージを表示
       }
@@ -262,7 +261,6 @@ const deleteFishing = () => {
       emit('close')
     },
     onError: (errors) => {
-      console.error(errors)
       if (page.props.errors) {
         alert(page.props.errors.error) // エラーメッセージを表示
       }
