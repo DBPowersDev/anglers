@@ -65,6 +65,7 @@ class FishingController extends Controller
         $pitcure->save();
 
         $this->deleteUpFile($path);
+        // $this->deleteUpFile(storage_path('app/' . $path));
 
         return redirect()
             ->route('fishing.index')
@@ -128,6 +129,12 @@ class FishingController extends Controller
 
     protected function deleteUpFile($path)
     {
-        Storage::delete($path);
+        if (Storage::exists($path)) { // ファイルが存在するか確認
+            Storage::delete($path); // ファイルを削除
+        } else {
+            // エラーログを記録するなどの処理を追加することができます
+            // dd('File not found for deletion: ' . $path);
+            \Log::warning('File not found for deletion: ' . $path);
+        }
     }
 }
