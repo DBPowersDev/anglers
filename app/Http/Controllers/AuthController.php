@@ -27,7 +27,7 @@ class AuthController extends Controller
 
         if (!Auth::attempt($credentials, true)) {
             throw ValidationException::withMessages([
-                'email' => 'Authentication failed'
+                'email' => __('Authentication failed')
             ]);
         }
 
