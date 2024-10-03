@@ -58,6 +58,7 @@ class User extends FMModel implements
     protected function casts(): array
     {
         return [
+            'id' => 'int',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
