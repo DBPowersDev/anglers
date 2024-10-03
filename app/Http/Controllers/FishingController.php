@@ -70,7 +70,6 @@ class FishingController extends Controller
         $pitcure->save();
 
         $this->deleteUpFile($path);
-        // $this->deleteUpFile(storage_path('app/' . $path));
 
         return redirect()
             ->route('fishing.index')
@@ -83,8 +82,10 @@ class FishingController extends Controller
     // public function show(string $id)
     public function show(Fishing $fishing)
     {
-        Gate::authorize('view', $fishing);
         // $fishing = Fishing::find($id);
+
+        Gate::authorize('view', $fishing);
+
         return inertia('Fishing/Show', [
             'fishing' => $fishing
         ]);
@@ -96,7 +97,7 @@ class FishingController extends Controller
     public function edit(Fishing $fishing)
     {
         Gate::authorize('update', $fishing);
-        // $modId = (int) $fishing->getModId();
+
         $modId = $fishing->getModId();
         return redirect()->back()
             ->with([
@@ -140,11 +141,12 @@ class FishingController extends Controller
 
     protected function deleteUpFile($path)
     {
-        if (Storage::exists($path)) { // ファイルが存在するか確認
+        if (Storage::exists($path)) {
+
             Storage::delete($path); // ファイルを削除
+
         } else {
-            // エラーログを記録するなどの処理を追加することができます
-            // dd('File not found for deletion: ' . $path);
+
             \Log::warning('File not found for deletion: ' . $path);
         }
     }
