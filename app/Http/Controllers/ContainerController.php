@@ -52,20 +52,20 @@ class ContainerController extends Controller
         $ext = explode('?', strtolower(@$info['extension']));
         $ext = $ext[0];
 
-        // クッキーの管理のためにCookieJarを作成
-        $cookieJar = \GuzzleHttp\Cookie\CookieJar::fromArray([], ''); // 空のクッキーを作成
+        // クッキーの管理のために CookieJar を作成
+        $cookieJar = \GuzzleHttp\Cookie\CookieJar::fromArray([], '');
 
-        // curlの代わりにHttpファサードを使用
+        // Http ファサードを使用
         $response = Http::withOptions([
             'follow_redirects' => true, // リダイレクトを追従
-            'cookies' => $cookieJar, // CookieJarを指定
+            'cookies' => $cookieJar, // CookieJar を指定
         ])->get($path);
 
         if ($response->failed()) {
-            return response()->json(['error' => $response->body()], 500); // エラーをJSON形式で返す
+            return response()->json(['error' => $response->body()], 500);
         }
 
-        // Content-Typeを設定してレスポンスを返す
+        // Content-Type を設定してレスポンスを返す
         $content_type = $this->mimes[$ext];
         return response($response->body(), 200)->header('Content-Type', $content_type);
     }
