@@ -7,9 +7,6 @@ use App\Models\Fishing;
 use App\Models\Picture;
 use Illuminate\Support\Facades\Gate;
 
-use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Foundation\Validation\ValidatesRequests;
-
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ContainerRequest;
@@ -17,14 +14,6 @@ use Intervention\Image\ImageManager;
 
 class FishingController extends Controller
 {
-
-    // use AuthorizesRequests, ValidatesRequests;
-
-    // public function __construct()
-    // {
-    //     $this->authorizeResource(Fishing::class, 'fishing');
-    // }
-
     /**
      * Display a listing of the resource.
      */
