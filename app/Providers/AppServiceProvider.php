@@ -13,7 +13,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        // 自作関数を登録
         $this->app->bind('MyUtil', MyUtil::class);
     }
 
