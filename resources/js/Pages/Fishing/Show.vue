@@ -55,7 +55,7 @@
                   </div>
                   <p class="sr-only">{{ reviews.average }} out of 5 stars</p>
                 </div>
-                <p class="ml-2 text-sm text-gray-500">{{ reviews.totalCount }} reviews</p>
+                <!-- <p class="ml-2 text-sm text-gray-500">{{ reviews.totalCount }} reviews</p> -->
               </div>
             </div>
           </div>
@@ -65,7 +65,9 @@
           </div>
 
           <div class="mt-6 flex items-center">
-            <CheckIcon class="h-5 w-5 flex-shrink-0 text-green-500" aria-hidden="true" />
+            <div class="flex justify-end">
+              <img :src="fishing.user_photo" alt="" class="h-8 w-8 rounded-full m-1" />
+            </div>
             <p class="ml-2 text-sm text-gray-500">{{ fishing.user_name }}</p>
           </div>
         </section>
@@ -94,37 +96,18 @@
 
 <script setup>
 import { ref } from 'vue'
-import { CheckIcon, QuestionMarkCircleIcon, StarIcon } from '@heroicons/vue/20/solid'
-import { RadioGroup, RadioGroupOption } from '@headlessui/vue'
-import { ShieldCheckIcon } from '@heroicons/vue/24/outline'
+import { StarIcon } from '@heroicons/vue/20/solid'
 
 const props = defineProps({
   open: Boolean,
-  fishing: {
-    type: Object,
-    default: () => ({ picture: '', place: '' }) // デフォルト値を設定
-  },
-  mod_id: String
+  fishing: Object
 })
 
 const product = {
-  name: 'Everyday Ruck Snack',
-  href: '#',
-  price: '$220',
-  description:
-    "Don't compromise on snack-carrying capacity with this lightweight and spacious bag. The drawstring top keeps all your favorite chips, crisps, fries, biscuits, crackers, and cookies secure.",
-  imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-04-featured-product-shot.jpg',
-  imageAlt: 'Model wearing light green backpack with black canvas straps and front zipper pouch.',
   breadcrumbs: [
     { id: 1, name: 'List', href: '#' },
     { id: 2, name: 'Show', href: '#' }
-  ],
-  sizes: [
-    { name: '18L', description: 'Perfect for a reasonable amount of snacks.' },
-    { name: '20L', description: 'Enough room for a serious amount of snacks.' }
   ]
 }
 const reviews = { average: 4, totalCount: 1624 }
-
-const selectedSize = ref(product.sizes[0])
 </script>
