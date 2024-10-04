@@ -47,9 +47,8 @@
                   <div class="sm:col-span-4 lg:col-span-5">
                     <div class="aspect-h-1 aspect-w-1 overflow-hidden rounded-lg bg-gray-100">
                       <img
-                        v-if="fishing && fishing.picture"
-                        :src="fishing.picture"
-                        :alt="fishing.place"
+                        :src="form.picture"
+                        :alt="form.place"
                         class="object-cover object-center"
                       />
                     </div>
@@ -58,7 +57,7 @@
                     <section aria-labelledby="options-heading" class="mt-6">
                       <h3 id="options-heading" class="sr-only">Fishing data</h3>
 
-                      <form @submit.prevent="submit">
+                      <form @submit.prevent="submit" novalidate>
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
                           <div class="sm:col-span-2 sm:col-start-1">
                             <label
@@ -66,14 +65,29 @@
                               class="block text-sm font-medium leading-6 text-gray-900"
                               >Date</label
                             >
-                            <div class="mt-2">
+                            <div class="relative mt-2 rounded-md shadow-sm">
                               <input
+                                @focus="form.clearErrors('fishing_date')"
                                 type="date"
                                 v-model="form.fishing_date"
                                 id="fishing_date"
                                 autocomplete="off"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
+                                :class="
+                                  form.errors.fishing_date ? 'input-text-valid' : 'input-text'
+                                "
                               />
+                              <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+                              >
+                                <ExclamationCircleIcon
+                                  v-if="form.errors.fishing_date"
+                                  class="h-5 w-5 text-red-500"
+                                  aria-hidden="true"
+                                />
+                              </div>
+                            </div>
+                            <div v-if="form.errors.fishing_date" class="input-error">
+                              {{ $t(form.errors.fishing_date) }}
                             </div>
                           </div>
 
@@ -83,13 +97,26 @@
                               class="block text-sm font-medium leading-6 text-gray-900"
                               >Comment</label
                             >
-                            <div class="mt-2">
+                            <div class="relative mt-2 rounded-md shadow-sm">
                               <textarea
+                                @focus="form.clearErrors('comment')"
                                 id="comment"
                                 v-model="form.comment"
                                 rows="3"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
+                                :class="form.errors.comment ? 'input-text-valid' : 'input-text'"
                               />
+                              <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+                              >
+                                <ExclamationCircleIcon
+                                  v-if="form.errors.comment"
+                                  class="h-5 w-5 text-red-500"
+                                  aria-hidden="true"
+                                />
+                              </div>
+                            </div>
+                            <div v-if="form.errors.comment" class="input-error">
+                              {{ $t(form.errors.comment) }}
                             </div>
                           </div>
 
@@ -99,14 +126,27 @@
                               class="block text-sm font-medium leading-6 text-gray-900"
                               >Place</label
                             >
-                            <div class="mt-2">
+                            <div class="relative mt-2 rounded-md shadow-sm">
                               <input
+                                @focus="form.clearErrors('place')"
                                 type="text"
                                 v-model="form.place"
                                 id="place"
                                 autocomplete="off"
-                                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
+                                :class="form.errors.place ? 'input-text-valid' : 'input-text'"
                               />
+                              <div
+                                class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3"
+                              >
+                                <ExclamationCircleIcon
+                                  v-if="form.errors.place"
+                                  class="h-5 w-5 text-red-500"
+                                  aria-hidden="true"
+                                />
+                              </div>
+                            </div>
+                            <div v-if="form.errors.place" class="input-error">
+                              {{ $t(form.errors.place) }}
                             </div>
                           </div>
 
@@ -212,16 +252,13 @@ import {
   TransitionChild,
   TransitionRoot
 } from '@headlessui/vue'
-import { ShieldCheckIcon, XMarkIcon } from '@heroicons/vue/24/outline'
-import { CheckIcon, QuestionMarkCircleIcon, StarIcon } from '@heroicons/vue/20/solid'
+import { XMarkIcon } from '@heroicons/vue/24/outline'
+import { ExclamationCircleIcon } from '@heroicons/vue/20/solid'
 import { useForm, usePage } from '@inertiajs/vue3'
 
 const props = defineProps({
   open: Boolean,
-  fishing: {
-    type: Object,
-    default: () => ({ picture: '', place: '' }) // デフォルト値を設定
-  },
+  fishing: Object,
   mod_id: Number
 })
 
@@ -230,22 +267,25 @@ const emit = defineEmits(['close'])
 const page = usePage()
 
 const form = useForm({
+  id: props.fishing ? props.fishing.id : null,
   fishing_date: props.fishing ? props.fishing.fishing_date : null,
   comment: props.fishing ? props.fishing.comment : null,
   place: props.fishing ? props.fishing.place : null,
   fishing_type: props.fishing ? props.fishing.fishing_type : null,
-  mod_id: props.mod_id ? props.mod_id : null
+  mod_id: props.mod_id ? props.mod_id : null,
+  picture: props.fishing ? props.fishing.picture : null
 })
 
 const updateFishing = () => {
-  form.put(route('fishing.update', { fishing: props.fishing.id }), {
+  form.put(route('fishing.update', { fishing: form.id }), {
     preserveScroll: true,
+    except: ['fishings'],
     onSuccess: () => {
       emit('close')
     },
     onError: (errors) => {
       if (page.props.errors) {
-        alert(page.props.errors.error) // エラーメッセージを表示
+        //
       }
     },
     onFinish: () => {
@@ -255,14 +295,14 @@ const updateFishing = () => {
 }
 
 const deleteFishing = () => {
-  form.delete(route('fishing.destroy', { fishing: props.fishing.id }), {
+  form.delete(route('fishing.destroy', { fishing: form.id }), {
     preserveScroll: true,
     onSuccess: () => {
       emit('close')
     },
     onError: (errors) => {
       if (page.props.errors) {
-        alert(page.props.errors.error) // エラーメッセージを表示
+        //
       }
     },
     onFinish: () => {

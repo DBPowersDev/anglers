@@ -26,6 +26,7 @@ class Fishing extends FMModel
         '削除日時' => 'deleted_at',
         '公開' => 'publish',
         'fishings|PICTURES::写真' => 'picture',
+        'fishings|PICTURES::サムネイル' => 'thumbnail',
         'fishings|USERS::name' => 'user_name',
         'fishings|USERS::photo' => 'user_photo',
     ];
@@ -51,6 +52,13 @@ class Fishing extends FMModel
     }
 
     protected function picture(): Attribute
+    {
+        return Attribute::make(
+            get: fn(string|null $value) => \MyUtil::getContainerUrl($value)
+        );
+    }
+
+    protected function thumbnail(): Attribute
     {
         return Attribute::make(
             get: fn(string|null $value) => \MyUtil::getContainerUrl($value)

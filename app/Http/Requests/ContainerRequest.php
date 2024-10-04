@@ -12,7 +12,6 @@ class ContainerRequest extends FormRequest
 {
     public function validationData()
     {
-        // dd($this->get('file_base64'));
         $all = parent::validationData();
 
         if ($this->get('file_base64')) {

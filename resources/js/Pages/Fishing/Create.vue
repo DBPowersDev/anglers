@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="submit">
+  <form @submit.prevent="submit" novalidate>
     <div class="space-y-12">
       <div class="border-b border-gray-900/10 pb-12">
         <h2 class="text-base font-semibold leading-7 text-gray-900">Fishing registration</h2>
@@ -9,14 +9,25 @@
             <label for="fishing_date" class="block text-sm font-medium leading-6 text-gray-900"
               >Date</label
             >
-            <div class="mt-2">
+            <div class="relative mt-2 rounded-md shadow-sm">
               <input
+                @focus="form.clearErrors('fishing_date')"
                 type="date"
                 v-model="form.fishing_date"
                 id="fishing_date"
                 autocomplete="off"
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
+                :class="form.errors.fishing_date ? 'input-text-valid' : 'input-text'"
               />
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                <ExclamationCircleIcon
+                  v-if="form.errors.fishing_date"
+                  class="h-5 w-5 text-red-500"
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+            <div v-if="form.errors.fishing_date" class="input-error">
+              {{ $t(form.errors.fishing_date) }}
             </div>
           </div>
 
@@ -24,13 +35,21 @@
             <label for="comment" class="block text-sm font-medium leading-6 text-gray-900"
               >Comment</label
             >
-            <div class="mt-2">
+            <div class="relative mt-2 rounded-md shadow-sm">
               <textarea
+                @focus="form.clearErrors('comment')"
                 id="comment"
                 v-model="form.comment"
                 rows="3"
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
+                :class="form.errors.comment ? 'input-text-valid' : 'input-text'"
               />
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                <ExclamationCircleIcon
+                  v-if="form.errors.comment"
+                  class="h-5 w-5 text-red-500"
+                  aria-hidden="true"
+                />
+              </div>
             </div>
           </div>
 
@@ -72,6 +91,9 @@
                 />
               </div>
             </div>
+            <div v-if="form.errors.file" class="input-error">
+              {{ $t(form.errors.file) }}
+            </div>
           </div>
         </div>
       </div>
@@ -82,14 +104,25 @@
             <label for="place" class="block text-sm font-medium leading-6 text-gray-900"
               >Place</label
             >
-            <div class="mt-2">
+            <div class="relative mt-2 rounded-md shadow-sm">
               <input
+                @focus="form.clearErrors('place')"
                 type="text"
                 v-model="form.place"
                 id="place"
                 autocomplete="off"
-                class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-orange-600 sm:text-sm sm:leading-6"
+                :class="form.errors.place ? 'input-text-valid' : 'input-text'"
               />
+              <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                <ExclamationCircleIcon
+                  v-if="form.errors.place"
+                  class="h-5 w-5 text-red-500"
+                  aria-hidden="true"
+                />
+              </div>
+            </div>
+            <div v-if="form.errors.place" class="input-error">
+              {{ $t(form.errors.place) }}
             </div>
           </div>
         </div>
@@ -161,7 +194,7 @@
 <script setup>
 import { computed } from 'vue'
 import { useForm, router } from '@inertiajs/vue3'
-import { PhotoIcon, UserCircleIcon } from '@heroicons/vue/24/solid'
+import { PhotoIcon, ExclamationCircleIcon } from '@heroicons/vue/24/solid'
 import NProgress from 'nprogress'
 
 router.on('progress', (event) => {

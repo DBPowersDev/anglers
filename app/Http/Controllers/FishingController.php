@@ -49,6 +49,15 @@ class FishingController extends Controller
     {
         Gate::authorize('create', $fishing);
 
+        $request->validate(
+            [
+                'fishing_date' => 'required|date',
+                'fishing_type' => 'required',
+                'place' => 'required',
+                'comment' => 'nullable|string|max:255',
+            ]
+        );
+
         $fishing = new Fishing();
         $fishing->fishing_date = $request->fishing_date;
         $fishing->fishing_type = $request->fishing_type;
@@ -112,6 +121,15 @@ class FishingController extends Controller
     public function update(Request $request, Fishing $fishing)
     {
         Gate::authorize('update', $fishing);
+
+        $request->validate(
+            [
+                'fishing_date' => 'required|date',
+                'fishing_type' => 'required',
+                'place' => 'required',
+                'comment' => 'nullable|string|max:255',
+            ]
+        );
 
         $fishing->fishing_date = $request->fishing_date;
         $fishing->fishing_type = $request->fishing_type;
