@@ -276,10 +276,14 @@ const form = useForm({
   picture: props.fishing ? props.fishing.picture : null
 })
 
+// 現在のURLクエリパラメータを取得
+const urlParams = new URLSearchParams(page.url.split('?')[1])
+const currentParams = Object.fromEntries(urlParams.entries())
+
 const updateFishing = () => {
-  form.put(route('fishing.update', { fishing: form.id }), {
+  form.put(route('fishing.update', { fishing: form.id, ...currentParams }), {
     preserveScroll: true,
-    except: ['fishings'],
+    only: ['fishings', 'flash'],
     onSuccess: () => {
       emit('close')
     },

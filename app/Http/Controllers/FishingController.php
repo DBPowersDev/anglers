@@ -131,16 +131,19 @@ class FishingController extends Controller
             ]
         );
 
+        $filters = $request->only([
+            'page'
+        ]);
+
         $fishing->fishing_date = $request->fishing_date;
         $fishing->fishing_type = $request->fishing_type;
         $fishing->place = $request->place;
         $fishing->comment = $request->comment;
 
-        $fishing->setModId($request->mod_id);
+        // $fishing->setModId($request->mod_id);
         $fishing->save();
-        // $fishing->update();
 
-        return redirect()->route('fishing.index')
+        return redirect()->route('fishing.index', $filters)
             ->with('success', __('Fishing changed successfully.'));
     }
 
