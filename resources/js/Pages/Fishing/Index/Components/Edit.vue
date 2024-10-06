@@ -63,7 +63,7 @@
                             <label
                               for="fishing_date"
                               class="block text-sm font-medium leading-6 text-gray-900"
-                              >Date</label
+                              >{{ $t('Date') }}</label
                             >
                             <div class="relative mt-2 rounded-md shadow-sm">
                               <input
@@ -95,7 +95,7 @@
                             <label
                               for="comment"
                               class="block text-sm font-medium leading-6 text-gray-900"
-                              >Comment</label
+                              >{{ $t('Comment') }}</label
                             >
                             <div class="relative mt-2 rounded-md shadow-sm">
                               <textarea
@@ -124,7 +124,7 @@
                             <label
                               for="place"
                               class="block text-sm font-medium leading-6 text-gray-900"
-                              >Place</label
+                              >{{ $t('Place') }}</label
                             >
                             <div class="relative mt-2 rounded-md shadow-sm">
                               <input
@@ -153,7 +153,7 @@
                           <div class="sm:col-span-3">
                             <fieldset>
                               <legend class="text-sm font-semibold leading-6 text-gray-900">
-                                Fishing type
+                                {{ $t('Fishing type') }}
                               </legend>
 
                               <div class="mt-6 space-y-6">
@@ -168,7 +168,7 @@
                                   <label
                                     for="fly-fishing"
                                     class="block text-sm font-medium leading-6 text-gray-900"
-                                    >fly fishing</label
+                                    >{{ $t('fly fishing') }}</label
                                   >
                                 </div>
                                 <div class="flex items-center gap-x-3">
@@ -182,7 +182,7 @@
                                   <label
                                     for="lure-fishing"
                                     class="block text-sm font-medium leading-6 text-gray-900"
-                                    >lure fishing</label
+                                    >{{ $t('lure fishing') }}</label
                                   >
                                 </div>
                                 <div class="flex items-center gap-x-3">
@@ -196,7 +196,7 @@
                                   <label
                                     for="bait-fishing"
                                     class="block text-sm font-medium leading-6 text-gray-900"
-                                    >bait fishing</label
+                                    >{{ $t('bait fishing') }}</label
                                   >
                                 </div>
                               </div>
@@ -210,7 +210,7 @@
                             class="text-sm font-semibold leading-6 text-red-600"
                             @click="deleteFishing"
                           >
-                            Delete
+                            {{ $t('Delete') }}
                           </button>
                           <div class="flex items-center gap-x-6 ml-auto">
                             <button
@@ -218,14 +218,14 @@
                               class="text-sm font-semibold leading-6 text-gray-900"
                               @click="reset"
                             >
-                              Cancel
+                              {{ $t('Cancel') }}
                             </button>
                             <button
                               @click="updateFishing"
                               type="button"
                               class="rounded-md bg-orange-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
                             >
-                              Save
+                              {{ $t('Save') }}
                             </button>
                           </div>
                         </div>

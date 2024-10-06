@@ -24,13 +24,22 @@
                     'rounded-md px-3 py-2 text-sm font-medium'
                   ]"
                   :aria-current="item.current ? 'page' : undefined"
-                  >{{ item.name }}</Link
+                  >{{ $t(item.name) }}</Link
                 >
               </div>
             </div>
           </div>
           <div class="hidden md:block">
             <div class="ml-4 flex items-center md:ml-6">
+              <button
+                type="button"
+                class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 mr-2"
+                @click="changeLang(thisLang.value === 'en' ? 'ja' : 'en')"
+              >
+                <span class="absolute -inset-1.5" />
+                <span class="sr-only">Change language</span>
+                <LanguageIcon class="h-6 w-6" aria-hidden="true" />
+              </button>
               <button
                 type="button"
                 class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -107,7 +116,7 @@
               'block rounded-md px-3 py-2 text-base font-medium'
             ]"
             :aria-current="item.current ? 'page' : undefined"
-            >{{ item.name }}</DisclosureButton
+            >{{ $t(item.name) }}</DisclosureButton
           >
         </div>
         <div class="border-t border-gray-700 pb-3 pt-4">
@@ -136,7 +145,7 @@
               :href="item.href"
               :method="item.method"
               class="w-full block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white text-start"
-              >{{ item.name }}</Link
+              >{{ $t(item.name) }}</Link
             >
           </div>
         </div>
@@ -173,20 +182,25 @@ import {
   MenuItem,
   MenuItems
 } from '@headlessui/vue'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/vue/24/outline'
+import { Bars3Icon, BellIcon, XMarkIcon, LanguageIcon } from '@heroicons/vue/24/outline'
 import { computed, ref } from 'vue'
-import { usePage, Link } from '@inertiajs/vue3'
+import { usePage, Link, router } from '@inertiajs/vue3'
+import { loadLanguageAsync, getActiveLanguage } from 'laravel-vue-i18n'
+import axios from 'axios'
 
 const page = usePage()
 const flashSuccess = computed(() => page.props.flash.success)
 
 const user = computed(() => page.props.user)
-// const user = {
-//   name: 'Tom Cook',
-//   email: 'tom@example.com',
-//   imageUrl:
-//     'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80'
-// }
+
+const thisLang = ref(getActiveLanguage().replace('_', '-'))
+
+const changeLang = async (lang) => {
+  await axios.get('/setlocale/' + lang)
+  loadLanguageAsync(lang)
+  thisLang.value = computed(() => lang)
+}
+
 const navigation = [
   { name: 'List', href: route('fishing.index'), current: true },
   { name: 'Registration', href: route('fishing.create'), current: false }

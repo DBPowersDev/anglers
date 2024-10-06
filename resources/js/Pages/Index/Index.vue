@@ -11,20 +11,21 @@
           <h1 class="mt-24 text-4xl font-bold tracking-tight text-gray-900 sm:mt-10 sm:text-6xl">
             Angler's
           </h1>
-          <p class="mt-6 text-lg leading-8 text-gray-600">
-            This Angler's Site is a platform where you can upload photos of the trout you catch and
-            show them off! Share your fishing achievements with fellow enthusiasts, celebrate your
-            catches, and connect with a community that appreciates the art of fishing. Join us to
-            showcase your best moments on the water and inspire others with your fishing adventures!
-          </p>
+          <div class="mt-6">
+            {{
+              $t(
+                "This Angler's Site is a platform where you can upload photos of the trout you catch and show them off! Share your fishing achievements with fellow enthusiasts, celebrate your catches, and connect with a community that appreciates the art of fishing. Join us to showcase your best moments on the water and inspire others with your fishing adventures!"
+              )
+            }}
+          </div>
           <div class="mt-10 flex items-center gap-x-6">
             <Link
               :href="route('login')"
               class="rounded-md bg-orange-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-orange-600"
-              >Sign in</Link
+              >{{ $t('Sign in') }}</Link
             >
             <a href="#" class="text-sm font-semibold leading-6 text-gray-900"
-              >Learn more <span aria-hidden="true">→</span></a
+              >{{ $t('Learn more') }} <span aria-hidden="true">→</span></a
             >
           </div>
         </div>
