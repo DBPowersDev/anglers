@@ -42,31 +42,4 @@ class ContainerController extends Controller
         $content_type = $this->mimes[$ext];
         return response($response->body(), 200)->header('Content-Type', $content_type);
     }
-
-    public function getImageBadKnowhow(Request $request)
-    {
-        $path = Crypt::decryptString($request->route('path'));
-        $info = pathinfo($path);
-        $ext = explode('?', strtolower(@$info['extension']));
-        $ext = $ext[0];
-
-        if (Config('my.verify_ssl') === false) {
-
-            $options = array(
-                'ssl' => array(
-                    'verify_peer' => false,
-                    'verify_peer_name' => false,
-                )
-            );
-
-            $img = file_get_contents($path, false, stream_context_create($options));
-        } else {
-
-            $img = file_get_contents($path, false);
-        }
-
-        $content_type = $this->mimes[$ext];
-        header('Content-Type: ' . $content_type);
-        echo $img;
-    }
 }
