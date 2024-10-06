@@ -150,13 +150,17 @@ class FishingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Fishing $fishing)
+    public function destroy(Request $request, Fishing $fishing)
     {
         Gate::authorize('delete', $fishing);
 
+        $filters = $request->only([
+            'page'
+        ]);
+
         $fishing->delete();
 
-        return redirect()->route('fishing.index')
+        return redirect()->route('fishing.index', $filters)
             ->with('success', __('Fishing deleted successfully.'));
     }
 
