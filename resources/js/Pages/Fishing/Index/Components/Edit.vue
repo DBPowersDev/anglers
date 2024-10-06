@@ -299,8 +299,9 @@ const updateFishing = () => {
 }
 
 const deleteFishing = () => {
-  form.delete(route('fishing.destroy', { fishing: form.id }), {
+  form.delete(route('fishing.destroy', { fishing: form.id, ...currentParams }), {
     preserveScroll: true,
+    only: ['fishings', 'flash'],
     onSuccess: () => {
       emit('close')
     },
