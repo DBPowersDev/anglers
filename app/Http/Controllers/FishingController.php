@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\ContainerRequest;
 use Intervention\Image\ImageManager;
 
+use Illuminate\Validation\ValidationException;
+
 class FishingController extends Controller
 {
     /**
@@ -122,6 +124,13 @@ class FishingController extends Controller
     {
         Gate::authorize('update', $fishing);
 
+        $modId = $fishing->getModId();
+        if ($modId !== $request->mod_id) {
+            throw ValidationException::withMessages([
+                'record' => __('Data has been updated by another user. Please try again.')
+            ]);
+        }
+
         $request->validate(
             [
                 'fishing_date' => 'required|date',
@@ -140,8 +149,16 @@ class FishingController extends Controller
         $fishing->place = $request->place;
         $fishing->comment = $request->comment;
 
-        // $fishing->setModId($request->mod_id);
-        $fishing->save();
+        try {
+            $fishing->save();
+        } catch (\Exception $e) {
+            // レコードが他のユーザーによって使用されている場合
+            if ($e->getCode() === 301) {
+                throw ValidationException::withMessages([
+                    'record' => __('Record is in use by another user. Please try again later.')
+                ]);
+            }
+        }
 
         return redirect()->route('fishing.index', $filters)
             ->with('success', __('Fishing changed successfully.'));

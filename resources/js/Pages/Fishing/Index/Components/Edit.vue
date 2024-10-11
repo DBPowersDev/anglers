@@ -58,8 +58,14 @@
                       <h3 id="options-heading" class="sr-only">Fishing data</h3>
 
                       <form @submit.prevent="submit" novalidate>
+                        <div
+                          v-if="form.errors.record"
+                          class="mb-4 border rounded-md shadow-sm border-red-200 bg-red-50 p-2 mt-2 ml-6 mr-6 text-red-600"
+                        >
+                          {{ $t(form.errors.record) }}
+                        </div>
                         <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                          <div class="sm:col-span-2 sm:col-start-1">
+                          <div class="sm:col-span-3 sm:col-start-1">
                             <label
                               for="fishing_date"
                               class="block text-sm font-medium leading-6 text-gray-900"
@@ -259,7 +265,7 @@ import { useForm, usePage } from '@inertiajs/vue3'
 const props = defineProps({
   open: Boolean,
   fishing: Object,
-  mod_id: Number
+  mod_id: String
 })
 
 const emit = defineEmits(['close'])
