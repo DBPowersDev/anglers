@@ -25,6 +25,11 @@ class ContainerController extends Controller
         $ext = explode('?', strtolower(@$info['extension']));
         $ext = $ext[0];
 
+        // 拡張子が見つからなかった場合の制御
+        if (empty($ext) || !array_key_exists($ext, $this->mimes)) {
+            return response()->json(['error' => 'Unsupported file type.'], 400);
+        }
+
         // クッキーの管理のために CookieJar を作成
         $cookieJar = \GuzzleHttp\Cookie\CookieJar::fromArray([], '');
 
