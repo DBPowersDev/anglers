@@ -583,16 +583,16 @@
         },
         {
             "name": "gearbox-solutions/eloquent-filemaker",
-            "version": "2.5.0",
+            "version": "2.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/gearbox-solutions/eloquent-filemaker.git",
-                "reference": "9a0e3376f5502076b3593319b99f0d1d977eba19"
+                "reference": "8d0fcb502ef9cc0c3e4fa759f2e4d473d5e0620a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/gearbox-solutions/eloquent-filemaker/zipball/9a0e3376f5502076b3593319b99f0d1d977eba19",
-                "reference": "9a0e3376f5502076b3593319b99f0d1d977eba19",
+                "url": "https://api.github.com/repos/gearbox-solutions/eloquent-filemaker/zipball/8d0fcb502ef9cc0c3e4fa759f2e4d473d5e0620a",
+                "reference": "8d0fcb502ef9cc0c3e4fa759f2e4d473d5e0620a",
                 "shasum": ""
             },
             "require": {
@@ -645,9 +645,9 @@
             ],
             "support": {
                 "issues": "https://github.com/gearbox-solutions/eloquent-filemaker/issues",
-                "source": "https://github.com/gearbox-solutions/eloquent-filemaker/tree/2.5.0"
+                "source": "https://github.com/gearbox-solutions/eloquent-filemaker/tree/2.5.2"
             },
-            "time": "2024-10-11T18:32:02+00:00"
+            "time": "2024-10-14T15:46:42+00:00"
         },
         {
             "name": "graham-campbell/result-type",

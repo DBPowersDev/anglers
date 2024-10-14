@@ -124,13 +124,6 @@ class FishingController extends Controller
     {
         Gate::authorize('update', $fishing);
 
-        $modId = $fishing->getModId();
-        if ($modId !== $request->mod_id) {
-            throw ValidationException::withMessages([
-                'record' => __('Data has been updated by another user. Please try again.')
-            ]);
-        }
-
         $request->validate(
             [
                 'fishing_date' => 'required|date',
@@ -150,13 +143,20 @@ class FishingController extends Controller
         $fishing->comment = $request->comment;
 
         try {
-            $fishing->save();
+            $fishing->withModId($request->mod_id)->save();
         } catch (\Exception $e) {
-            // レコードが他のユーザーによって使用されている場合
             if ($e->getCode() === 301) {
+                // レコードが他のユーザーによって使用されている場合
                 throw ValidationException::withMessages([
                     'record' => __('Record is in use by another user. Please try again later.')
                 ]);
+            } else if ($e->getCode() === 306) {
+                // レコードが他のユーザーによって変更されている場合
+                throw ValidationException::withMessages([
+                    'record' => __('Data has been updated by another user. Please try again.')
+                ]);
+            } else {
+                throw $e;
             }
         }
 
