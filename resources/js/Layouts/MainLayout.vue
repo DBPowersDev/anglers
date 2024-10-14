@@ -34,7 +34,7 @@
               <button
                 type="button"
                 class="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 mr-2"
-                @click="changeLang(thisLang.value === 'en' ? 'ja' : 'en')"
+                @click="changeLanguage(thisLang.value === 'en' ? 'ja' : 'en')"
               >
                 <span class="absolute -inset-1.5" />
                 <span class="sr-only">Change language</span>
@@ -185,20 +185,16 @@ import {
 import { Bars3Icon, BellIcon, XMarkIcon, LanguageIcon } from '@heroicons/vue/24/outline'
 import { computed, ref } from 'vue'
 import { usePage, Link, router } from '@inertiajs/vue3'
-import { loadLanguageAsync, getActiveLanguage } from 'laravel-vue-i18n'
-import axios from 'axios'
+import { changeLang, getCurrentLanguage } from '../utils'
 
 const page = usePage()
 const flashSuccess = computed(() => page.props.flash.success)
 
 const user = computed(() => page.props.user)
 
-const thisLang = ref(getActiveLanguage().replace('_', '-'))
-
-const changeLang = async (lang) => {
-  await axios.get('/setlocale/' + lang)
-  loadLanguageAsync(lang)
-  thisLang.value = computed(() => lang)
+const thisLang = computed(() => getCurrentLanguage())
+const changeLanguage = async (lang) => {
+  await changeLang(lang)
 }
 
 const navigation = [

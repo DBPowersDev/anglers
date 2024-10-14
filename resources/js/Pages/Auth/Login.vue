@@ -80,6 +80,23 @@
             $t('Start a 14-day free trial')
           }}</a>
         </p>
+
+        <div class="flex items-center justify-center text-sm text-gray-500 mt-6">
+          <button
+            type="button"
+            @click="changeLanguage('ja')"
+            class="text-sm font-semibold leading-6 text-gray-900"
+          >
+            {{ $t('Japanese') }}
+          </button>
+          <button
+            type="button"
+            @click="changeLanguage('en')"
+            class="ml-3 text-sm font-semibold leading-6 text-gray-900 border-l border-gray-200 pl-3"
+          >
+            {{ $t('English') }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -90,6 +107,12 @@ import { computed, ref } from 'vue'
 import { useForm, Link, usePage } from '@inertiajs/vue3'
 import SingleLayout from '/resources/js/Layouts/SingleLayout.vue'
 defineOptions({ layout: SingleLayout }) // ここでレイアウトファイルを指定する
+
+import { changeLang } from '../../utils'
+
+const changeLanguage = async (lang) => {
+  await changeLang(lang)
+}
 
 const form = useForm({
   email: null,

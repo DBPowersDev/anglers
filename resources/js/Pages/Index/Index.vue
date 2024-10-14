@@ -11,6 +11,23 @@
           <h1 class="mt-24 text-4xl font-bold tracking-tight text-gray-900 sm:mt-10 sm:text-6xl">
             Angler's
           </h1>
+          <div class="flex items-center text-sm text-gray-500 mt-6">
+            <button
+              type="button"
+              @click="changeLanguage('ja')"
+              class="text-sm font-semibold leading-6 text-gray-900"
+            >
+              {{ $t('Japanese') }}
+            </button>
+            <button
+              type="button"
+              @click="changeLanguage('en')"
+              class="ml-3 text-sm font-semibold leading-6 text-gray-900 border-l border-gray-200 pl-3"
+            >
+              {{ $t('English') }}
+            </button>
+          </div>
+
           <div class="mt-6">
             {{
               $t(
@@ -43,5 +60,10 @@
 <script setup>
 import { Link } from '@inertiajs/vue3'
 import SingleLayout from '/resources/js/Layouts/SingleLayout.vue'
-defineOptions({ layout: SingleLayout }) // ここでレイアウトファイルを指定する
+defineOptions({ layout: SingleLayout })
+import { changeLang } from '../../utils'
+
+const changeLanguage = async (lang) => {
+  await changeLang(lang)
+}
 </script>
