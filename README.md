@@ -28,6 +28,7 @@
 9. `exit` でコンテナ内から出る
 10. ユーザー登録は実装していませんので、会員(users)テーブルに手動でサンプルユーザーを作成 `php artisan tinker` 対話モードで`\App\Models\User::create(['mame' => 'test_user', 'email' => 'test_user@hoge.com', 'password' => \Hash::make('12345678')]);`
 11. 開発モードで APP を実行 `npm run dev`
+12. localhost:8000 にアクセス
 
 > [!NOTE]
 > .env にて SSL の検証をするか否か `MY_VERIFY_SSL=false` となっていますが、開発環境のみの設定です。本来ここは true としてください。
