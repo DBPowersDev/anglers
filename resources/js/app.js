@@ -30,5 +30,10 @@ createInertiaApp({
         }
       })
       .mount(el)
+  },
+  progress: {
+    color: 'orange',
+    // デフォルトのCSSを読み込まない CSP
+    includeCSS: false
   }
 })

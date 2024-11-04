@@ -5,7 +5,7 @@
         :href="prev_page_url ?? 'null'"
         :class="[
           'inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700',
-          { disabled: !prev_page_url }
+          { 'pointer-events-none opacity-50': !prev_page_url }
         ]"
       >
         <ArrowLongLeftIcon class="mr-3 h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -47,7 +47,7 @@
         :href="next_page_url ?? 'null'"
         :class="[
           'inline-flex items-center border-t-2 border-transparent pr-1 pt-4 text-sm font-medium text-gray-500 hover:border-gray-300 hover:text-gray-700',
-          { disabled: !next_page_url }
+          { 'pointer-events-none opacity-50': !next_page_url }
         ]"
       >
         {{ $t('Next') }}
@@ -62,10 +62,3 @@ import { Link } from '@inertiajs/vue3'
 import { ArrowLongLeftIcon, ArrowLongRightIcon } from '@heroicons/vue/20/solid'
 defineProps({ links: Array, next_page_url: String, prev_page_url: String })
 </script>
-
-<style scoped>
-.disabled {
-  pointer-events: none;
-  opacity: 0.5;
-}
-</style>
