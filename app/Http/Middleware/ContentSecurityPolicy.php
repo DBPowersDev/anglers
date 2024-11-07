@@ -35,7 +35,7 @@ class ContentSecurityPolicy
             connect-src 'self' ws://{$viteServerHost}:*;
             script-src 'self' 'nonce-{$nonce}' {$viteServerHost}:*;
             style-src 'self' 'unsafe-inline';
-            img-src 'self' data:;
+            img-src 'self' data: blob:;
             END;
         } else {
 
@@ -45,7 +45,7 @@ class ContentSecurityPolicy
             connect-src 'self';
             script-src 'self' 'nonce-{$nonce}';
             style-src 'self';
-            img-src 'self' data:;
+            img-src 'self' data: blob:;
             END;
         }
 
