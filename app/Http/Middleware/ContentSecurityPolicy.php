@@ -24,7 +24,6 @@ class ContentSecurityPolicy
         // app.blade.phpで生成したノンスを取得
         $nonce = $request->session()->get('csp_nonce', ''); // セッションから取得
 
-        // heredocをダブルクオートで囲む
         if (env('APP_ENV') === 'local') {
 
             $viteServerHost = env('VITE_SERVER_HOST');
