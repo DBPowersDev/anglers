@@ -27,5 +27,10 @@
   "Start a 14-day free trial": "今すぐ登録",
   "Authentication failed": "認証に失敗しました",
   "Japanese": "日本語",
-  "English": "英語"
+  "English": "英語",
+  "Fishing created successfully.": "釣行データを登録しました。",
+  "Fishing changed successfully.": "釣行データを変更しました。",
+  "Record is in use by another user. Please try again later.": "レコードが他のユーザーによって使用されています。後でもう一度お試しください。",
+  "Data has been updated by another user. Please try again.": "データが他のユーザーによって変更されています。もう一度お試しください。",
+  "Fishing deleted successfully.": "釣行データを削除しました。"
 }
