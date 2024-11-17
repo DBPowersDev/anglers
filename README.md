@@ -1,37 +1,37 @@
 ## About Angler's
 
-### Claris カンファレンス 2024
+### Claris Conference 2024
 
-#### T-28 人気フレームワーク Laravel と Claris FileMaker の連携方法の紹介 (Laravel 11 対応)
+#### T-28 Introduction to Integrating Popular Framework Laravel with Claris FileMaker (Compatible with Laravel 11)
 
-サンプルアプリケーション
+Sample Application
 ![](image/2024-10-04-10-37-08.png)
 
-## 実行環境
+## Execution Environment
 
 - Docker Desktop
 - PHP 8.3
-- composer
-- node.js と npm
+- Composer
+- Node.js and npm
 - FileMaker Server 21.0.2.202
 
-## 起動方法
+## Startup Instructions
 
-1. .env.example 　を複製し、.env とする
-2. 設定値 DB_HOST に fms の IP アドレスを設定
-3. APP_KEY の生成を `php artisan key:generate` で行う
-4. PHP パッケージのインストール `composer install`
-5. Node.js パッケージのインストール `npm install`
-6. Laravel Sail の起動 `./vendor/bin/sail up -d`
-7. Laravel コンテナ内に入る `docker exec -it laravel.test-1 /bin/bash`
-8. public 内に storage ディレクトリのリンク `php artisan storage:link`
-9. `exit` でコンテナ内から出る
-10. ユーザー登録は実装していませんので、会員(users)テーブルに手動でサンプルユーザーを作成 `php artisan tinker` 対話モードで`\App\Models\User::create(['mame' => 'test_user', 'email' => 'test_user@hoge.com', 'password' => \Hash::make('12345678')]);`
-11. 開発モードで APP を実行 `npm run dev`
-12. localhost:8000 にアクセス
+1. Duplicate `.env.example` and rename it to `.env`
+2. Set the DB_HOST configuration value to the IP address of the FileMaker Server (fms)
+3. Install PHP packages with `composer install`
+4. Install Node.js packages with `npm install`
+5. Generate the APP_KEY using `php artisan key:generate`
+6. Start Laravel Sail with `./vendor/bin/sail up -d`
+7. Enter the Laravel container with `docker exec -it laravel.test-1 /bin/bash`
+8. Create a link to the storage directory in public with `php artisan storage:link`
+9. Exit the container with `exit`
+10. User registration is not implemented, so manually create a sample user in the members (users) table with `php artisan tinker` in interactive mode: `\App\Models\User::create(['name' => 'test_user', 'email' => 'test_user@hoge.com', 'password' => \Hash::make('12345678')]);`
+11. Run the app in development mode with `npm run dev`
+12. Access the application at `localhost:8000`
 
 > [!NOTE]
-> .env にて SSL の検証をするか否か `MY_VERIFY_SSL=false` となっていますが、開発環境のみの設定です。本来ここは true としてください。
+> In the `.env` file, the SSL verification setting is `MY_VERIFY_SSL=false`, but this is only for the development environment. It should be set to true in production.
 
 ### anglers.fmp12
 
