@@ -19,6 +19,7 @@ yarn-error.log
 /.idea
 /.vscode
 /.zed
+/.serena
 php_en.json
 php_ja.json
 .DS_Store
